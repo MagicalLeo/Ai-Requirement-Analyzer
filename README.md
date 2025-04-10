@@ -2,7 +2,7 @@
 
 基于Remix框架和OpenAI API的智能需求分析工具，通过提示词工程，将需求文档转化为用户故事、需求实体和数据库设计。
 
-![项目截图](https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80)
+![项目截图](https://pixhost.to/show/1562/586253223_main_page.jpg)
 
 ## 技术栈
 

@@ -5,6 +5,7 @@
 ## 项目截图
 ![image](https://github.com/MagicalLeo/Ai-Requirement-Analyzer/blob/main/images/main_page.jpg)
 ![image](https://github.com/MagicalLeo/Ai-Requirement-Analyzer/blob/main/images/project_page.png)
+![image](https://github.com/MagicalLeo/Ai-Requirement-Analyzer/blob/main/images/database_gen.png)
 
 ## 技术栈
 

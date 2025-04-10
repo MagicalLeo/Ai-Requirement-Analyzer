@@ -1,0 +1,37 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"  // 从sqlite改为mysql
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String    @id @default(uuid())
+  email            String    @unique
+  passwordHash     String
+  name             String?
+  resetToken       String?   // 密码重置令牌
+  resetTokenExpires DateTime? // 密码重置令牌过期时间
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  projects         Project[]
+}
+
+model Project {
+  id             String   @id @default(uuid())
+  name           String
+  description    String?  @db.Text
+  requirementDoc String?  @db.Text  // 使用Text类型以支持更长的文本
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userStories    String?  @db.Text  // 使用Text类型
+  entities       String?  @db.Text  // 使用Text类型
+  dbDesign       String?  @db.Text  // 使用Text类型
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([userId])
+}

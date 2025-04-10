@@ -1,138 +1,246 @@
+// app/routes/_index.tsx
 import type { MetaFunction } from "@remix-run/node";
+import { Link } from "@remix-run/react";
+import { useEffect } from "react";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "AI 需求分析师 - 智能需求分析和数据库设计工具" },
+    { name: "description", content: "使用 AI 技术快速分析需求,生成用户故事、实体关系和数据库设计" },
   ];
 };
 
 export default function Index() {
+  //添加滚动动画效果
+  useEffect(() => {
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      elements.forEach(element => {
+        const position = element.getBoundingClientRect();
+        //当元素进入视图时添加动画类
+        if (position.top < window.innerHeight - 100) {
+          element.classList.add('fade-in-up');
+          element.classList.remove('opacity-0');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', animateOnScroll);
+    //初始运行一次以处理已在视图中的元素
+    animateOnScroll();
+
+    return () => window.removeEventListener('scroll', animateOnScroll);
+  }, []);
+
   return (
-    <div className="flex h-screen items-center justify-center">
-      <div className="flex flex-col items-center gap-16">
-        <header className="flex flex-col items-center gap-9">
-          <h1 className="leading text-2xl font-bold text-gray-800 dark:text-gray-100">
-            Welcome to <span className="sr-only">Remix</span>
-          </h1>
-          <div className="h-[144px] w-[434px]">
+    <div className="relative">
+      {/* 自定义全局样式 */}
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .fade-in-up {
+          animation: fadeInUp 0.6s ease forwards;
+        }
+        .animate-on-scroll {
+          transition: opacity 0.6s, transform 0.6s;
+        }
+      `}</style>
+
+      {/* 英雄区域 - 增强版 */}
+      <div className="relative overflow-hidden bg-gradient-to-r from-white to-primary-50">
+        <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+        <div className="mx-auto max-w-7xl">
+          <div className="relative z-10 bg-transparent pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32">
+            <main className="mx-auto mt-10 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+              <div className="sm:text-center lg:text-left">
+                <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+                  <span className="block xl:inline">使用 AI 技术</span>{" "}
+                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-blue-600 xl:inline">
+                    智能分析需求
+                  </span>
+                </h1>
+                <p className="mt-3 text-base text-gray-500 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">
+                  上传您的需求文档或直接输入需求描述,AI 需求分析师将自动帮您生成用户故事、需求实体和数据库设计,大幅提升开发效率。
+                </p>
+                <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+                  <div className="rounded-md shadow-lg transform transition duration-300 hover:scale-105">
+                    <Link
+                      to="/register"
+                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-primary-600 to-primary-500 px-8 py-3 text-base font-medium text-white hover:from-primary-700 hover:to-primary-600 md:py-4 md:px-10 md:text-lg shadow-md"
+                    >
+                      立即注册
+                    </Link>
+                  </div>
+                  <div className="mt-3 sm:mt-0 sm:ml-3 transform transition duration-300 hover:scale-105">
+                    <Link
+                      to="/login"
+                      className="flex w-full items-center justify-center rounded-md border border-primary-300 bg-white px-8 py-3 text-base font-medium text-primary-700 hover:bg-primary-50 md:py-4 md: px-10 md:text-lg shadow-md"
+                    >
+                      登录
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+        <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+          <div className="h-56 w-full relative sm:h-72 md:h-96 lg:h-full lg:w-full overflow-hidden">
+            <div className="absolute inset-0 bg-primary-100 mix-blend-multiply"></div>
             <img
-              src="/logo-light.png"
-              alt="Remix"
-              className="block w-full dark:hidden"
-            />
-            <img
-              src="/logo-dark.png"
-              alt="Remix"
-              className="hidden w-full dark:block"
+              className="h-full w-full object-cover transition-transform duration-5000 hover:scale-105"
+              src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
+              alt="开发团队合作"
             />
           </div>
-        </header>
-        <nav className="flex flex-col items-center justify-center gap-4 rounded-3xl border border-gray-200 p-6 dark:border-gray-700">
-          <p className="leading-6 text-gray-700 dark:text-gray-200">
-            What&apos;s next?
-          </p>
-          <ul>
-            {resources.map(({ href, text, icon }) => (
-              <li key={href}>
-                <a
-                  className="group flex items-center gap-3 self-stretch p-3 leading-normal text-blue-700 hover:underline dark:text-blue-500"
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {icon}
-                  {text}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        </div>
       </div>
+
+      {/* 特性区域 - 优化版 */}
+      <div className="py-16 bg-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="lg:text-center animate-on-scroll opacity-0">
+            <h2 className="text-base text-primary-600 font-semibold tracking-wide uppercase">功能特点</h2>
+            <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+              更智能的需求分析方式
+            </p>
+            <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+              利用先进的 AI 技术,我们可以快速理解您的需求,并自动生成开发所需的各种文档。
+            </p>
+          </div>
+
+          <div className="mt-16">
+            <dl className="space-y-12 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-16">
+              <div className="relative animate-on-scroll opacity-0">
+                <dt>
+                  <div className="absolute flex items-center justify-center h-16 w-16 rounded-xl bg-gradient-to-r from-primary-500 to-primary-400 text-white shadow-lg transform transition-all duration-300 hover:scale-110">
+                    <svg className="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"  />
+                    </svg>
+                  </div>
+                  <p className="ml-20 text-xl leading-6 font-bold text-gray-900">智能生成用户故事</p>
+                </dt>
+                <dd className="mt-3 ml-20 text-base text-gray-500 leading-relaxed">
+                  基于您的需求文档,自动识别和生成符合敏捷开发标准的用户故事,帮助团队更好地理解和实现功能。
+                </dd>
+              </div>
+
+              <div className="relative animate-on-scroll opacity-0">
+                <dt>
+                  <div className="absolute flex items-center justify-center h-16 w-16 rounded-xl bg-gradient-to-r from-primary-500 to-primary-400 text-white shadow-lg transform transition-all duration-300 hover:scale-110">
+                    <svg className="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <p className="ml-20 text-xl leading-6 font-bold text-gray-900">需求实体分析</p>
+                </dt>
+                <dd className="mt-3 ml-20 text-base text-gray-500 leading-relaxed">
+                  自动识别需求中的核心业务实体,分析其属性和关系,建立清晰的业务领域模型。
+                </dd>
+              </div>
+
+              <div className="relative animate-on-scroll opacity-0">
+                <dt>
+                  <div className="absolute flex items-center justify-center h-16 w-16 rounded-xl bg-gradient-to-r from-primary-500 to-primary-400 text-white shadow-lg transform transition-all duration-300 hover:scale-110">
+                    <svg className="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2. 21-3.582 4-8 4s-8-1.79-8-4" />
+                    </svg>
+                  </div>
+                  <p className="ml-20 text-xl leading-6 font-bold text-gray-900">数据库设计</p>
+                </dt>
+                <dd className="mt-3 ml-20 text-base text-gray-500 leading-relaxed">
+                  根据需求和实体分析,自动生成优化的数据库设计,包括表结构、字段定义、关系和索引等。
+                </dd>
+              </div>
+
+              <div className="relative animate-on-scroll opacity-0">
+                <dt>
+                  <div className="absolute flex items-center justify-center h-16 w-16 rounded-xl bg-gradient-to-r from-primary-500 to-primary-400 text-white shadow-lg transform transition-all duration-300 hover:scale-110">
+                    <svg className="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                    </svg>
+                  </div>
+                  <p className="ml-20 text-xl leading-6 font-bold text-gray-900">集成开发工具</p>
+                </dt>
+                <dd className="mt-3 ml-20 text-base text-gray-500 leading-relaxed">
+                  支持与 PowerDesigner 等专业工具集成,方便导出和进一步编辑设计方案。
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      {/* CTA 区域 - 现代化版本 */}
+      <div className="bg-gradient-to-r from-primary-50 to-blue-50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/images/dot-pattern.svg')] bg-center opacity-10"></div>
+        <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-24 lg:px-8 lg:flex lg:items-center lg:justify-between relative z-10">
+          <div className="animate-on-scroll opacity-0">
+            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+              <span className="block">准备好开始了吗？ </span>
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-blue-600">立即注册免费体验。 </span>
+            </h2>
+            <p className="mt-4 text-lg text-gray-500 max-w-3xl">
+              加入我们的平台,体验 AI 智能分析为您的项目开发带来的效率提升。 我们提供 14 天免费试用,无需信用卡。
+            </p>
+          </div>
+          <div className="mt-8 flex flex-col sm:flex-row lg:mt-0 lg:flex-shrink-0 animate-on-scroll opacity-0">
+            <div className="inline-flex rounded-md shadow-lg transform transition duration-300 hover:scale-105">
+              <Link
+                to="/register"
+                className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 shadow-md"
+              >
+                立即开始
+              </Link>
+            </div>
+            <div className="mt-3 sm:mt-0 sm:ml-3 inline-flex rounded-md shadow transform transition duration-300 hover:scale-105">
+              <a
+                href="#features"
+                className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-primary-600 bg-white hover:bg-primary-50 shadow-md"
+              >
+                了解更多
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 简单的页脚 */}
+      <footer className="bg-gray-50 border-t border-gray-200">
+        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-center space-x-6">
+            <button type="button" className="text-gray-400 hover:text-gray-500">
+              <span className="sr-only">关于我们</span>
+              关于我们
+            </button>
+            <button type="button" className="text-gray-400 hover:text-gray-500">
+              <span className="sr-only">联系我们</span>
+              联系我们
+            </button>
+            <button type="button" className="text-gray-400 hover:text-gray-500">
+              <span className="sr-only">帮助中心</span>
+              帮助中心
+            </button>
+            <button type="button" className="text-gray-400 hover:text-gray-500">
+              <span className="sr-only">隐私政策</span>
+              隐私政策
+            </button>
+          </div>
+          <p className="mt-8 text-center text-base text-gray-400">
+            © 2025 All right reserved
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
-
-const resources = [
-  {
-    href: "https://remix.run/start/quickstart",
-    text: "Quick Start (5 min)",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="20"
-        viewBox="0 0 20 20"
-        fill="none"
-        className="stroke-gray-600 group-hover:stroke-current dark:stroke-gray-300"
-      >
-        <path
-          d="M8.51851 12.0741L7.92592 18L15.6296 9.7037L11.4815 7.33333L12.0741 2L4.37036 10.2963L8.51851 12.0741Z"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    href: "https://remix.run/start/tutorial",
-    text: "Tutorial (30 min)",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="20"
-        viewBox="0 0 20 20"
-        fill="none"
-        className="stroke-gray-600 group-hover:stroke-current dark:stroke-gray-300"
-      >
-        <path
-          d="M4.561 12.749L3.15503 14.1549M3.00811 8.99944H1.01978M3.15503 3.84489L4.561 5.2508M8.3107 1.70923L8.3107 3.69749M13.4655 3.84489L12.0595 5.2508M18.1868 17.0974L16.635 18.6491C16.4636 18.8205 16.1858 18.8205 16.0144 18.6491L13.568 16.2028C13.383 16.0178 13.0784 16.0347 12.915 16.239L11.2697 18.2956C11.047 18.5739 10.6029 18.4847 10.505 18.142L7.85215 8.85711C7.75756 8.52603 8.06365 8.21994 8.39472 8.31453L17.6796 10.9673C18.0223 11.0653 18.1115 11.5094 17.8332 11.7321L15.7766 13.3773C15.5723 13.5408 15.5554 13.8454 15.7404 14.0304L18.1868 16.4767C18.3582 16.6481 18.3582 16.926 18.1868 17.0974Z"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    href: "https://remix.run/docs",
-    text: "Remix Docs",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="20"
-        viewBox="0 0 20 20"
-        fill="none"
-        className="stroke-gray-600 group-hover:stroke-current dark:stroke-gray-300"
-      >
-        <path
-          d="M9.99981 10.0751V9.99992M17.4688 17.4688C15.889 19.0485 11.2645 16.9853 7.13958 12.8604C3.01467 8.73546 0.951405 4.11091 2.53116 2.53116C4.11091 0.951405 8.73546 3.01467 12.8604 7.13958C16.9853 11.2645 19.0485 15.889 17.4688 17.4688ZM2.53132 17.4688C0.951566 15.8891 3.01483 11.2645 7.13974 7.13963C11.2647 3.01471 15.8892 0.951453 17.469 2.53121C19.0487 4.11096 16.9854 8.73551 12.8605 12.8604C8.73562 16.9853 4.11107 19.0486 2.53132 17.4688Z"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    href: "https://rmx.as/discord",
-    text: "Join Discord",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="20"
-        viewBox="0 0 24 20"
-        fill="none"
-        className="stroke-gray-600 group-hover:stroke-current dark:stroke-gray-300"
-      >
-        <path
-          d="M15.0686 1.25995L14.5477 1.17423L14.2913 1.63578C14.1754 1.84439 14.0545 2.08275 13.9422 2.31963C12.6461 2.16488 11.3406 2.16505 10.0445 2.32014C9.92822 2.08178 9.80478 1.84975 9.67412 1.62413L9.41449 1.17584L8.90333 1.25995C7.33547 1.51794 5.80717 1.99419 4.37748 2.66939L4.19 2.75793L4.07461 2.93019C1.23864 7.16437 0.46302 11.3053 0.838165 15.3924L0.868838 15.7266L1.13844 15.9264C2.81818 17.1714 4.68053 18.1233 6.68582 18.719L7.18892 18.8684L7.50166 18.4469C7.96179 17.8268 8.36504 17.1824 8.709 16.4944L8.71099 16.4904C10.8645 17.0471 13.128 17.0485 15.2821 16.4947C15.6261 17.1826 16.0293 17.8269 16.4892 18.4469L16.805 18.8725L17.3116 18.717C19.3056 18.105 21.1876 17.1751 22.8559 15.9238L23.1224 15.724L23.1528 15.3923C23.5873 10.6524 22.3579 6.53306 19.8947 2.90714L19.7759 2.73227L19.5833 2.64518C18.1437 1.99439 16.6386 1.51826 15.0686 1.25995ZM16.6074 10.7755L16.6074 10.7756C16.5934 11.6409 16.0212 12.1444 15.4783 12.1444C14.9297 12.1444 14.3493 11.6173 14.3493 10.7877C14.3493 9.94885 14.9378 9.41192 15.4783 9.41192C16.0471 9.41192 16.6209 9.93851 16.6074 10.7755ZM8.49373 12.1444C7.94513 12.1444 7.36471 11.6173 7.36471 10.7877C7.36471 9.94885 7.95323 9.41192 8.49373 9.41192C9.06038 9.41192 9.63892 9.93712 9.6417 10.7815C9.62517 11.6239 9.05462 12.1444 8.49373 12.1444Z"
-          strokeWidth="1.5"
-        />
-      </svg>
-    ),
-  },
-];

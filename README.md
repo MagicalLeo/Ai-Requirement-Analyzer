@@ -2,7 +2,7 @@
 
 基于Remix框架和OpenAI API的智能需求分析工具，通过提示词工程，将需求文档转化为用户故事、需求实体和数据库设计。
 
-![项目截图](https://pixhost.to/show/1562/586253223_main_page.jpg)
+![项目截图]([https://pixhost.to/show/1562/586253223_main_page.jpg](https://img12.pixhost.to/images/1562/586253223_main_page.jpg))
 
 ## 技术栈
 
@@ -41,11 +41,9 @@
    npm install
    ```
 
-3. 配置环境变量
+3. 编辑环境变量
    ```bash
-   # 复制示例环境变量文件
-   cp .env.example .env
-   
+   vim .env
    # 编辑.env文件，填入必要的配置
    ```
 

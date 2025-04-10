@@ -160,3 +160,4 @@ ai-requirements-analyzer/
 如有任何问题或建议，请通过以下方式联系我们：
 - 电子邮件: leo92816leo92816@gmail.com
 - GitHub: [项目仓库](https://github.com/MagicalLeo/Ai-Requirement-Analyzer)
+- Try now: [運行地址](https://ai-requirement-analyzer.vercel.app/)
